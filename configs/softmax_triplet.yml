@@ -1,18 +1,18 @@
 MODEL:
   PRETRAIN_CHOICE: 'imagenet'
-  PRETRAIN_PATH: '/home/haoluo/.torch/models/resnet50-19c8e357.pth'
+  PRETRAIN_PATH: '/home/hanchuchu/.torch/models/resnet50-19c8e357.pth'
   METRIC_LOSS_TYPE: 'triplet'
-  IF_LABELSMOOTH: 'on'
+  IF_LABELSMOOTH: 'off'
   IF_WITH_CENTER: 'no'
 
 
 
 
 INPUT:
-  SIZE_TRAIN: [256, 128]
-  SIZE_TEST: [256, 128]
+  SIZE_TRAIN: [384, 128]
+  SIZE_TEST: [384, 128]
   PROB: 0.5 # random horizontal flip
-  RE_PROB: 0.5 # random erasing
+  RE_PROB: 0.0 # random erasing
   PADDING: 10
 
 DATASETS:
@@ -62,6 +62,6 @@ TEST:
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
 
-OUTPUT_DIR: "/home/haoluo/log/gu/reid_baseline_review/Opensource_test/market1501/Experiment-all-tricks-256x128-bs16x4-warmup10-erase0_5-labelsmooth_on-laststride1-bnneck_on"
+OUTPUT_DIR: "/unsullied/sharefs/hanchuchu/isilon-home/train_log/reid/3.30_baseline"
 
 
