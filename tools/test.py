@@ -25,6 +25,7 @@ def main():
     parser.add_argument(
         "--config_file", default="", help="path to config file", type=str
     )
+    parser.add_argument("flag", action='store_false', help="whether to test multiple models")
     parser.add_argument("opts", help="Modify config options using the command-line", default=None,
                         nargs=argparse.REMAINDER)
 
@@ -58,10 +59,20 @@ def main():
 
     train_loader, val_loader, num_query, num_classes = make_data_loader(cfg)
     model = build_model(cfg, num_classes)
-    model.load_param(cfg.TEST.WEIGHT)
-
-    inference(cfg, model, val_loader, num_query)
-
+    if args.flag:
+        path, _ = os.path.split(cfg.TEST.WEIGHT)
+        model_list=[]
+        for root, dirs, files in os.walk(path):
+            for i in files:
+                if i.startswith('resnet50_model'):
+                    model_list.append(i)
+        for i in model_list:
+            print(i)
+            model.load_param(os.path.join(path,i))
+            inference(cfg, model, val_loader, num_query)
+    else:
+        model.load_param(cfg.TEST.WEIGHT)
+        inference(cfg, model, val_loader, num_query)
 
 if __name__ == '__main__':
     main()

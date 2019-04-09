@@ -2,7 +2,7 @@ MODEL:
   PRETRAIN_CHOICE: 'imagenet'
   PRETRAIN_PATH: '/home/hanchuchu/.torch/models/resnet50-19c8e357.pth'
   METRIC_LOSS_TYPE: 'triplet'
-  IF_LABELSMOOTH: 'off'
+  IF_LABELSMOOTH: 'on'
   IF_WITH_CENTER: 'no'
 
 
@@ -12,11 +12,12 @@ INPUT:
   SIZE_TRAIN: [384, 128]
   SIZE_TEST: [384, 128]
   PROB: 0.5 # random horizontal flip
-  RE_PROB: 0.0 # random erasing
+  RE_PROB: 0.5 # random erasing
   PADDING: 10
 
 DATASETS:
   NAMES: ('market1501')
+#  NAMES: ('dukemtmc')
 
 DATALOADER:
   SAMPLER: 'softmax_triplet'
@@ -58,10 +59,10 @@ SOLVER:
 TEST:
   IMS_PER_BATCH: 128
   RE_RANKING: 'no'
-  WEIGHT: "path"
+  WEIGHT: "/unsullied/sharefs/hanchuchu/isilon-home/train_log/reid/3.30_duke_baseline_strong/resnet50_model_120.pth"
   NECK_FEAT: 'after'
   FEAT_NORM: 'yes'
 
-OUTPUT_DIR: "/unsullied/sharefs/hanchuchu/isilon-home/train_log/reid/3.30_baseline"
+OUTPUT_DIR: "/unsullied/sharefs/hanchuchu/isilon-home/train_log/reid/3.30_duke_baseline_strong"
 
 
